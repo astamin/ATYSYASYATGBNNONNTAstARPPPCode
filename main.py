@@ -24,8 +24,11 @@ Bullying = False
 Drugs = False
 Cooldown = 10
 url = "https://www.instagram.com/api/v1/web/reports/get_frx_prompt/"
-## Load Settings
-bot = TeleBot(token=BotToken)
+try:
+    bot = TeleBot(token=BotToken , exception_handler=None)
+except:
+    pass
+
 def delete_folder(folder_path):
     try:
         shutil.rmtree(folder_path)
@@ -200,7 +203,7 @@ def Monitor():
         except Exception as gg:
             print(gg)
 Thread(None,Monitor).start()
-print("> Monitor Starting!")
+print("> Bot is Online Now !")
 def IsMsg(message):
     return True
 @bot.message_handler(func=IsMsg)
@@ -261,8 +264,6 @@ def starting(message):
                         count+=1
                         bot.send_message(message.chat.id,f"<b>{count}.{UU}</b>",parse_mode="HTML")
             elif message.text == "Run":
-                with open(end_time_file, "w") as f:
-                    f.write(str(time.time() + Cooldown))
                 bot.send_message(message.chat.id,"<b>Give Me Your Acconts [User:Pass] ? </b>",parse_mode="HTML")
                 bot.register_next_step_handler_by_chat_id(message.chat.id,Login)
             elif message.text == "Control Panel":
@@ -3003,4 +3004,4 @@ def NextStepPromoCode(message):
 
 
 
-bot.infinity_polling()
+bot.polling(non_stop=True)
