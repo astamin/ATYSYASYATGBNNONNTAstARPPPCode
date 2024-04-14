@@ -261,16 +261,6 @@ def starting(message):
                         count+=1
                         bot.send_message(message.chat.id,f"<b>{count}.{UU}</b>",parse_mode="HTML")
             elif message.text == "Run":
-                if user_id != str(ADMINID):
-                if not os.path.exists(user_directory):
-                    os.makedirs(user_directory)
-                if os.path.exists(end_time_file):
-                    with open(end_time_file, "r") as f:
-                        end_time = float(f.read())
-                    if time.time() < end_time:
-                        remaining_time = int(end_time - time.time())
-                        bot.reply_to(message, f"[ ANTI-SPAM ]. Please wait {remaining_time} seconds before sending another message.")
-                        return
                 with open(end_time_file, "w") as f:
                     f.write(str(time.time() + Cooldown))
                 bot.send_message(message.chat.id,"<b>Give Me Your Acconts [User:Pass] ? </b>",parse_mode="HTML")
